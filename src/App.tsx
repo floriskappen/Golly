@@ -1,5 +1,7 @@
-import React, { useState, useCallback, useRef } from "react"
-import produce from "immer"
+import React, { useState, useCallback, useRef } from 'react'
+import produce from 'immer'
+
+import './App.scss'
 
 const numRows = 40
 const numCols = 40
@@ -75,6 +77,13 @@ const App: React.FC = () => {
 
     return (
         <>
+            <header>
+                <div className="logo">LOGO</div>
+                <div className="right-buttons">
+                    <button>Inspiration</button>
+                    <button>Creator</button>
+                </div>
+            </header>
             <button
                 onClick={() => {
                     setRunning(!running)
@@ -84,7 +93,7 @@ const App: React.FC = () => {
                     }
                 }}
             >
-                {running ? "stop" : "start"}
+                {running ? 'stop' : 'start'}
             </button>
             <button
                 onClick={() => {
@@ -120,8 +129,8 @@ const App: React.FC = () => {
             />
             <div
                 style={{
-                    display: "grid",
-                    gridTemplateColumns: `repeat(${numCols}, 20px`
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${numCols}, 15px`
                 }}
             >
                 {grid.map((rows, i) =>
@@ -134,14 +143,9 @@ const App: React.FC = () => {
                                 })
                                 setGrid(newGrid)
                             }}
-                            style={{
-                                width: 20,
-                                height: 20,
-                                backgroundColor: grid[i][k]
-                                    ? "pink"
-                                    : undefined,
-                                border: "solid 1px black"
-                            }}
+                            className={
+                                'grid-element ' + (grid[i][k] ? 'active' : '')
+                            }
                         ></div>
                     ))
                 )}
