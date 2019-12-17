@@ -1,5 +1,5 @@
 body {
-    background-color: #110929;
+    background-color: #0d0720;
     color: white;
 }
 
@@ -39,17 +39,60 @@ header {
     }
 }
 
-.grid-element {
-    width: 15px;
-    height: 15px;
-    border: 1px solid #ffffff15;
-    transition: background-color 0.5s cubic-bezier();
+.grid-outter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
-    &:hover {
-        background-color: #1d1536;
-    }
+    .grid-inner {
+        width: 60vw;
+        background-color: white;
+        display: flex;
+        justify-content: space-around;
+        background-color: #110929;
+        .grid {
+            .grid-element {
+                width: 1vw;
+                height: 1vw;
+                border: 1px solid #ffffff15;
+                transition: background-color 0.5s cubic-bezier();
 
-    &.active {
-        background-color: #5439a3;
+                &:hover {
+                    background-color: #1d1536;
+                }
+
+                &.active {
+                    background-color: #5439a3;
+                }
+            }
+        }
+
+        .pattern-selector-outter {
+            height: 100%;
+            padding: 20px 0;
+            .title {
+                text-align: center;
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            .pattern-selector-inner {
+                background-color: darkcyan;
+                margin-top: 20px;
+
+                .pattern {
+                    width: 150px;
+                    height: 150px;
+                    position: relative;
+
+                    .name {
+                        position: absolute;
+                        bottom: 15px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+            }
+        }
     }
 }

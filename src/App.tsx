@@ -3,8 +3,8 @@ import produce from 'immer'
 
 import './App.scss'
 
-const numRows = 40
-const numCols = 40
+const numRows = 30
+const numCols = 30
 
 const operations = [
     [0, 1],
@@ -127,28 +127,47 @@ const App: React.FC = () => {
                     console.log(value)
                 }}
             />
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${numCols}, 15px`
-                }}
-            >
-                {grid.map((rows, i) =>
-                    rows.map((col, k) => (
-                        <div
-                            key={`${i}-${k}`}
-                            onClick={() => {
-                                const newGrid = produce(grid, gridCopy => {
-                                    gridCopy[i][k] = grid[i][k] ? 0 : 1
-                                })
-                                setGrid(newGrid)
-                            }}
-                            className={
-                                'grid-element ' + (grid[i][k] ? 'active' : '')
-                            }
-                        ></div>
-                    ))
-                )}
+            <div className="grid-outter">
+                <div className="grid-inner">
+                    <div
+                        className="grid"
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(${numCols}, 1vw`
+                        }}
+                    >
+                        {grid.map((rows, i) =>
+                            rows.map((col, k) => (
+                                <div
+                                    key={`${i}-${k}`}
+                                    onClick={() => {
+                                        const newGrid = produce(
+                                            grid,
+                                            gridCopy => {
+                                                gridCopy[i][k] = grid[i][k]
+                                                    ? 0
+                                                    : 1
+                                            }
+                                        )
+                                        setGrid(newGrid)
+                                    }}
+                                    className={
+                                        'grid-element ' +
+                                        (grid[i][k] ? 'active' : '')
+                                    }
+                                ></div>
+                            ))
+                        )}
+                    </div>
+                    <div className="pattern-selector-outter">
+                        <div className="title">Select a pattern</div>
+                        <div className="pattern-selector-inner">
+                            <div className="pattern">
+                                <div className="name">Pattern #1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
