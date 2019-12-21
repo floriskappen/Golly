@@ -21,6 +21,9 @@ const generateEmptyGrid = () => {
     const rows = []
     for (let i = 0; i < numRows; i++) {
         rows.push(Array.from(Array(numCols), () => 0))
+        // if (i === 6) {
+        //     rows[0][6] = 1
+        // }
     }
 
     return rows
@@ -76,7 +79,14 @@ const App: React.FC = () => {
     }, [])
 
     return (
-        <>
+        <div
+            className="wrapper"
+            style={
+                running
+                    ? { animation: '2s scrollFast infinite linear' }
+                    : { animation: '5s scrollNormal infinite linear' }
+            }
+        >
             <header>
                 <div className="logo">LOGO</div>
                 <div className="right-buttons">
@@ -84,49 +94,42 @@ const App: React.FC = () => {
                     <button>Creator</button>
                 </div>
             </header>
-            <button
-                onClick={() => {
-                    setRunning(!running)
-                    if (!running) {
-                        runningRef.current = true
-                        runSimulation()
-                    }
-                }}
-            >
-                {running ? 'stop' : 'start'}
-            </button>
-            <button
-                onClick={() => {
-                    setGrid(generateEmptyGrid())
-                }}
-            >
-                clear
-            </button>
-            <button
-                onClick={() => {
-                    const rows = []
-                    for (let i = 0; i < numRows; i++) {
-                        rows.push(
-                            Array.from(Array(numCols), () =>
-                                Math.random() > 0.7 ? 1 : 0
+            <div className="buttons-wrapper">
+                <button
+                    onClick={() => {
+                        setRunning(!running)
+                        if (!running) {
+                            runningRef.current = true
+                            runSimulation()
+                        }
+                    }}
+                >
+                    {running ? 'STOP' : 'START'}
+                </button>
+                <button
+                    onClick={() => {
+                        setGrid(generateEmptyGrid())
+                    }}
+                >
+                    CLEAR
+                </button>
+                <button
+                    onClick={() => {
+                        const rows = []
+                        for (let i = 0; i < numRows; i++) {
+                            rows.push(
+                                Array.from(Array(numCols), () =>
+                                    Math.random() > 0.7 ? 1 : 0
+                                )
                             )
-                        )
-                    }
+                        }
 
-                    setGrid(rows)
-                }}
-            >
-                random
-            </button>
-            <input
-                type="range"
-                min="1"
-                max="10"
-                onMouseUp={() => {
-                    setValue(value + 100)
-                    console.log(value)
-                }}
-            />
+                        setGrid(rows)
+                    }}
+                >
+                    RANDOM
+                </button>
+            </div>
             <div className="grid-outter">
                 <div className="grid-inner">
                     <div
@@ -169,7 +172,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
